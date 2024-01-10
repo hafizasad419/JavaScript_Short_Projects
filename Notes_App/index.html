@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write and Save Notes With Notty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins', 'serif';
+        }
+
+        body {
+
+            min-width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(145deg, #ff8ea1, #ea3dea);
+        }
+
+        /* .container {} */
+
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-top: 12vh;
+            font-size: 3rem;
+        }
+
+        h1 .headingSpan {
+            font-size: 1.3rem;
+            position: relative;
+            bottom: 4vh;
+
+        }
+
+        h1 .now,
+        h1 .later {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ffff29;
+        }
+
+        #createBtn {
+            color: #ffffff;
+            margin-left: 44vw;
+            width: 10vw;
+            height: 7vh;
+            border: none;
+            outline: none;
+            background: linear-gradient(135deg, #6666edb5, #eb10ebc5, #ffa600a3);
+            font-weight: 800;
+            border-radius: 1vw;
+            cursor: pointer;
+            transition: 0.3s;
+
+        }
+
+        #createBtn:hover {
+            background: linear-gradient(135deg, #3131ffb5, #eb10ebf3, #e49400e2);
+            transform: scale(1.1);
+            transition: 0.4s;
+        }
+
+        .inputBox {
+            position: relative;
+            background-color: #ffffffc8;
+            border: none;
+            outline: none;
+            min-height: 20vh;
+            margin: 0 30vw;
+            margin-top: 6vh;
+            padding: 1vw;
+            border-radius: 0.6vw;
+            overflow: hidden;
+
+        }
+
+        .note {
+            min-height: 6vh;
+            border: none;
+            outline: none;
+        }
+
+        .note[contenteditable="true"]:empty:before {
+            content: attr(title);
+            color: #524e4ecf;
+            display: block;
+            pointer-events: none;
+        }
+
+        .bin {
+            position: absolute;
+            height: 6vh;
+            bottom: 5px;
+            right: 5px;
+            cursor: pointer;
+            transition: 0.4s;
+
+        }
+
+        .bin:hover {
+            transform: scale(1.1);
+            transition: 0.4s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>N o t t y <br /><span class="headingSpan">Notes For <span class="now">Now</span> and <span
+                    class="later">Later</span></span></h1>
+        <button id="createBtn">Create New Notty</button>
+        <div class="note-container"></div>
+    </div>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        showNotes();
+    });
+
+    function showNotes() {
+        const savedNotes = JSON.parse(localStorage.getItem("Notes")) || [];
+        const noteContainer = document.querySelector('.note-container');
+
+        savedNotes.forEach(savedNote => {
+            const newNote = createNoteElement(savedNote);
+            noteContainer.appendChild(newNote);
+        });
+    }
+
+    let button = document.querySelector('#createBtn');
+    button.addEventListener('click', (e) => {
+        const noteContainer = document.querySelector('.note-container');
+        const newNote = createNoteElement('');
+        noteContainer.appendChild(newNote);
+    });
+
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('bin')) {
+            const noteToRemove = e.target.parentNode;
+            noteToRemove.remove();
+            updateStorage();
+        }
+    });
+
+    document.addEventListener('input', function () {
+        updateStorage();
+    });
+
+    function updateStorage() {
+        const noteContainer = document.querySelector('.note-container');
+        const notes = noteContainer.querySelectorAll('.note');
+        const noteContents = [];
+
+        notes.forEach(note => {
+            noteContents.push(note.innerHTML);
+        });
+
+        localStorage.setItem("Notes", JSON.stringify(noteContents));
+    }
+
+    function createNoteElement(content) {
+        let inputBox = document.createElement('div');
+        inputBox.className = 'inputBox';
+        let note = document.createElement('p');
+        note.className = 'note';
+        note.setAttribute('contenteditable', "true");
+        note.innerHTML = content;
+        note.setAttribute('title', "Write Your Notty Note");
+        let img = document.createElement('img');
+        img.src = './bin.png';
+        img.className = 'bin';
+        inputBox.appendChild(note);
+        inputBox.appendChild(img);
+
+        return inputBox;
+    }
+
+
+
+
+</script>
+
+</html>

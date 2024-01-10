@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Password Generator</title>
+
+    <style>
+        * {
+            font-family: 'poppins', 'serif';
+            margin: 0;
+            padding: 0;
+
+
+        }
+
+        body {
+            background: linear-gradient(90deg, #3535fa, #800080);
+        }
+
+        .container {
+
+            /* background-color: red; */
+            margin-top: 15vh;
+            padding: 4vh 10vw;
+        }
+
+        .container h1 {
+            font-weight: 100;
+            color: #ffffff;
+            font-size: 3rem;
+        }
+
+        .container h1 span {
+            text-decoration: underline;
+            color: #00e178;
+
+        }
+
+        .inputContainer {
+            background-color: #ffffff;
+            border-radius: 1vw;
+            max-width: 55vw;
+            display: flex;
+            justify-content: space-between;
+            padding: 4vh 2vw;
+            margin: 6vh 0;
+        }
+
+        .inputContainer input {
+            width: 50%;
+            font-size: 1.1rem;
+            /* height: 12vh; */
+            /* background: green; */
+            border: none;
+            outline: none;
+        }
+
+        .inputContainer img {
+            /* width: 50%; */
+            width: 3vw;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+
+        .inputContainer img:hover {
+            transform: scale(1.05);
+            transition: 0.5s;
+        }
+
+        #genrateBtn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 4vh 0;
+            height: 12vh;
+            width: 25vw;
+            font-size: 1.2rem;
+            color: #ffffff;
+            background-color: #02924f;
+            border: none;
+            outline: none;
+            border-radius: 0.5vw;
+            cursor: pointer;
+            transition: transform 0.5s;
+
+        }
+
+        #genrateBtn:hover {
+            transform: scale(1.05);
+            transition: 0.5s;
+        }
+
+        #genrateBtn span {
+            height: 10vh;
+            margin-right: 1vw;
+            /* background-color: orange; */
+        }
+
+        #genrateBtn span img {
+            height: 100%;
+        }
+
+        #message{
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="heading">
+            Generate a <br />
+            <span>Random Password.</span>
+        </h1>
+
+        <div class="inputContainer">
+            <input id="randomPassword" type="text" placeholder='Click "Generate Password" Button'>
+            <span id="copyBtn"><img src="./assets/copy.png" alt=""></span>
+
+        </div>
+        <span id="message"></span>
+        <button id="genrateBtn"><span><img src="./assets/generate.png" alt="" srcset=""></span>Generate
+            Password</button>
+
+    </div>
+
+    <script>
+        const input = document.querySelector('#randomPassword');
+        const genrateBtn = document.querySelector('#genrateBtn');
+        const copyBtn = document.querySelector('#copyBtn');
+
+
+        genrateBtn.addEventListener('click', function (e) {
+            const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+            const numbers = "0123456789";
+            const symbols = "~=#$%^&*()_+{><}";
+
+
+            let password = "";
+            password += upperCase[Math.floor((Math.random() * 25) + 1)];
+            password += upperCase[Math.floor((Math.random() * 25) + 1)];
+            password += lowerCase[Math.floor((Math.random() * 25) + 1)];
+            password += numbers[Math.floor((Math.random() * 9) + 1)];
+            password += numbers[Math.floor((Math.random() * 9) + 1)];
+            password += upperCase[Math.floor((Math.random() * 25) + 1)];
+            password += symbols[Math.floor((Math.random() * 15) + 1)];
+            password += numbers[Math.floor((Math.random() * 9) + 1)];
+            password += symbols[Math.floor((Math.random() * 15) + 1)];
+            password += upperCase[Math.floor((Math.random() * 25) + 1)];
+            password += numbers[Math.floor((Math.random() * 9) + 1)];
+            password += upperCase[Math.floor((Math.random() * 25) + 1)];
+            input.value = password;
+        })
+
+        copyBtn.addEventListener('click', function () {
+            let password = input.value;
+            navigator.clipboard.writeText(password);
+            let span = document.querySelector('#message');
+            if (!password) {
+
+                span.innerHTML = "Please Generate Password First";
+                span.style.color = "#c00707"
+            }
+            else {
+
+                span.innerHTML = "Password copied to clipboard Successfully.";
+                span.style.color = "#02924f"
+            }
+
+
+
+        })
+
+    </script>
+
+</body>
+
+</html>

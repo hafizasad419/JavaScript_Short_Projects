@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <style>
+        * {
+            font-family: 'poppins';
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(435deg, #ffb6c1, #55c8ee);
+        }
+
+        .container {
+            background-color: #fff;
+            min-width: 40vw;
+            text-align: center;
+            margin: 30vh 20vw;
+            padding: 5vw;
+            background: linear-gradient(435deg, #ffb6c1, #55c8ee);
+            box-shadow: 0 0 2vw rgba(0, 0, 0, 0.1);
+            border-radius: 1vw;
+
+        }
+
+        .container h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            /* color: #942cf5;
+            color: #6b3f8f; */
+            /* color: #813bf0; */
+            color: #037fe4;
+        }
+
+        .container #time {
+            font-size: 2rem;
+            /* color: #2085a6; */
+            color: #fff;
+        }
+
+        .container .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container #start,
+        #stop,
+        #reset {
+            cursor: pointer;
+            min-width: 6vw;
+            min-height: 5vh;
+            margin: 1vw;
+            border: none;
+            outline: none;
+            border-radius: 0.7vh;
+            font-weight: 800;
+            transition: 0.4s;
+        }
+
+        #start {
+            color: #1c8c1c;
+            width: 10vw;
+            height: 7vh;
+            font-size: 2rem;
+        }
+
+        #start:hover {
+            background-color: #1c8c1c;
+            color: #ffffff;
+
+        }
+
+        #stop {
+            font-size: 1rem;
+            color: #ffb52b;
+        }
+
+        #stop:hover {
+            background-color: #ffb52b;
+            color: #ffffff;
+
+        }
+
+        #reset {
+            font-size: 1rem;
+            color: #c63232;
+        }
+
+        #reset:hover {
+            font-size: 1rem;
+            background-color: #c63232;
+            color: #ffffff;
+        }
+
+        .container #start:hover,
+        #stop:hover,
+        #reset:hover {
+            transform: scale(1.1);
+            transition: 0.4s;
+        }
+
+        @media screen and (max-width: 600px) {
+            .container {
+                margin: 20vh 5vw;
+            }
+
+            #start {
+                width: 40vw;
+                height: 7vh;
+                font-size: 1.5rem;
+            }
+
+            #stop,
+            #reset {
+                min-width: 20vw;
+                min-height: 5vh;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Stop Watch</h1>
+        <h2 id="time">00:00:00</h2>
+        <div class="buttons">
+            <button id="stop">Stop</button>
+            <button id="start">Start</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+</body>
+
+<script>
+    let [seconds, minutes, hours] = [0, 0, 0];
+    let time = document.querySelector('#time');
+    let timer = null;
+
+    function stopWatch() {
+        seconds++;
+        if (seconds == 60) {
+            seconds = 0
+            minutes++;
+
+            if (minutes == 60) {
+                minutes = 0
+                hours++
+            }
+        }
+        let h = hours < 10 ? `0${hours}` : hours
+        let m = minutes < 10 ? `0${minutes}` : minutes
+        let s = seconds < 10 ? `0${seconds}` : seconds
+        time.innerHTML = `${h}: ${m}: ${s}`
+
+    }
+
+    function watchStart() {
+        if (timer !== null) {
+            clearInterval(timer)
+        }
+        timer = setInterval(stopWatch, 1000)
+
+    }
+    function watchStop() {
+        clearInterval(timer)
+
+    }
+    function watchReset() {
+        clearInterval(timer);
+        [seconds, minutes, hours] = [0, 0, 0];
+        time.innerHTML = "00:00:00"
+
+    }
+
+
+    document.addEventListener('click', function (e) {
+        if (e.target.id.includes('start')) {
+            watchStart()
+        }
+        if (e.target.id.includes('stop')) {
+            watchStop()
+        }
+
+        if (e.target.id.includes('reset')) {
+            watchReset()
+        }
+    })
+
+
+
+
+
+
+</script>
+
+</html>

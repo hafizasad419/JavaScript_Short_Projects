@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator App</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins', 'serif';
+
+        }
+
+        body {
+            background-color: #aa0794;
+        }
+
+        .container {
+            background-color: #800080;
+            min-height: 75vh;
+            margin-top: 13vh;
+            margin-left: 35vw;
+            padding: 2vh 2vw;
+            max-width: 25vw;
+            border-radius: 1vw;
+        }
+
+        .container #values {
+            width: 100%;
+            height: 10vh;
+            font-size: 2rem;
+            text-indent: 1vw;
+            border: none;
+            outline: none;
+            border-radius: 0.5vw;
+            color: #650365;
+        }
+
+        /* .allButtons{
+             margin: 2vh 0; 
+        } */
+
+        .flex {
+            /* background-color: red; */
+            display: flex;
+            justify-content: center;
+            /* width: 100%; */
+            margin: 5vh 0;
+
+        }
+
+        .flex input[type="button"] {
+            font-size: 1rem;
+            font-weight: 800;
+            width: 4vw;
+            height: 7vh;
+            margin: 0 1vw;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            border-radius: 0.5vw;
+            background-color: #da70d6;
+            transition: transform 0.4s;
+        }
+
+        .flex input[type="button"]:hover {
+            transform: scale(1.05);
+            background-color: #fe56f8;
+            transition: 0.4s;
+        }
+
+        #equal {
+
+            width: 10vw;
+        }
+
+        .operator{
+            color: #ffffff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <input id="values" type="text" title="Values Will Show Up Here">
+
+        <div class="allButtons">
+
+
+            <!-- first row -->
+            <div class="flex">
+                <input type="button" value="AC" onclick="input.value=''" class="operator"></input>
+                <input type="button" value="DE" onclick="input.value=input.value.toString().slice(0,-1)" class="operator"></input>
+                <input type="button" value="." onclick="input.value+='.'" class="operator"></input>
+                <input type="button" value="/" onclick="input.value+='/'" class="operator"></input>
+            </div>
+
+            <!-- second row -->
+
+            <div class="flex">
+                <input type="button" value="7" onclick="input.value+='7'"></input>
+                <input type="button" value="8" onclick="input.value+='8'"></input>
+                <input type="button" value="9" onclick="input.value+='9'"></input>
+                <input type="button" value="*" onclick="input.value+='*'" class="operator"></input>
+            </div>
+            <!-- third row -->
+
+            <div class="flex">
+                <input type="button" value="4" onclick="input.value+='4'"></input>
+                <input type="button" value="5" onclick="input.value+='5'"></input>
+                <input type="button" value="6" onclick="input.value+='6'"></input>
+                <input type="button" value="-" onclick="input.value+='-'" class="operator"></input>
+            </div>
+            <!-- fourth row -->
+
+            <div class="flex">
+                <input type="button" value="1" onclick="input.value+='1'"></input>
+                <input type="button" value="2" onclick="input.value+='2'"></input>
+                <input type="button" value="3" onclick="input.value+='3'"></input>
+                <input type="button" value="+" onclick="input.value+='+'" class="operator"></input>
+            </div>
+
+            <!-- fifth row  -->
+
+            <div class="flex" id="lastRow">
+                <input type="button" value="00" onclick="input.value+='00'"></input>
+                <input type="button" value="0" onclick="input.value+='0'"></input>
+                <input id="equal" type="button" value="=" class="operator"></input>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+</body>
+
+<script>
+    let input = document.getElementById("values");
+    let equalBtn = document.getElementById("equal");
+
+    equalBtn.addEventListener('click', function (e) {
+        if (!input.value) {
+            input.setAttribute = ("placeholder", "Please Add Any Value.")
+            input.style.fontSize = "1.1rem"
+
+        } else {
+
+            input.value = eval(input.value)
+        }
+
+
+
+
+    })
+</script>
+
+</html>

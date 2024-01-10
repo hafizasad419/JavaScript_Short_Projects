@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins', sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #935375;
+        }
+
+        .container{
+            min-height: 100vh;
+            background-color: #1f1818;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        #submitBtn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* margin: 4vh 0; */
+            height: 12vh;
+            width: 25vw;
+            font-size: 1.2rem;
+            color: #ffffff;
+            background-color: #044829;
+            border: none;
+            outline: none;
+            border-radius: 0.5vw;
+            cursor: pointer;
+            transition: transform 0.5s;
+
+        }
+
+        #submitBtn:hover {
+            transform: scale(1.05);
+            transition: 0.5s;
+            background-color: #02924f;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <button type="submit" id="submitBtn">Submit</button>
+
+        <div class="popup">
+            <img src="" alt="">
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Search Engine | Powered By UNSPLASH</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'poppins', 'serif';
+        }
+
+        body {
+            background: linear-gradient(90deg, #dc546a, #49b8de, #801280);
+        }
+
+        h1 {
+            text-align: center;
+            color: #731bc6;
+            margin-top: 5vh;
+        }
+
+        #searchForm {
+            background: #ffffff4d;
+            display: flex;
+            align-items: center;
+            max-width: 600px;
+            text-align: center;
+            margin: 5vh auto;
+            /* Center the form horizontally */
+            height: 80px;
+            width: 80%;
+            /* Adjusted the width for better responsiveness */
+            padding: 3vh 0;
+            border-radius: 15px;
+            /* Added border-radius to the form */
+
+        }
+
+        #searchForm #searchBox {
+            flex: 1;
+            background:transparent;
+            border: none;
+            outline: none;
+            padding: 2vh 2vw;
+            /* Adjusted padding for better spacing */
+            width: 60%;
+            text-indent: 0.5vw;
+            border-top-left-radius: 15px;
+
+        }
+
+        #searchBox::placeholder {
+
+            font-size: 1rem;
+        }
+
+        #searchForm #searchBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: none;
+            outline: none;
+            padding: 6.3vh 0;
+            /* Adjusted padding for better alignment */
+            height: 100%;
+            width: 30%;
+            /* Set the button width to 100% */
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            /* Added border-radius to the button */
+            background-color: #731bc6;
+            /* Added a background color for a professional look */
+            color: #ffffff;
+            /* Set text color to white */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1.5rem;
+            text-align: center;
+
+            /* Added a smooth transition on hover */
+        }
+
+        #searchForm #searchBtn:hover {
+            background-color: #5a1496;
+            /* Darker color on hover */
+        }
+
+        #showMoreBtn {
+            /* text-align: center; */
+            width: 10vw;
+            margin: 3vh 45vw;
+            background-color: #731bc6;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            display: none;
+        }
+
+        #showMoreBtn:hover {
+            background-color: #5a1496;
+        }
+
+        #searchResults {
+            width: 80%;
+            margin: 100px auto 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 40px;
+        }
+
+        #searchResults img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Image Search Engine</h1>
+    <form id="searchForm">
+        <input id="searchBox" type="text" placeholder="Search Anything Here">
+        <button id="searchBtn" type="submit">Search</button>
+    </form>
+
+    <div id="searchResults">
+
+    </div>
+
+
+
+    <button id="showMoreBtn">Show More</button>
+
+    <script>
+        let searchForm = document.getElementById('searchForm')
+        let searchBox = document.getElementById('searchBox')
+        let searchBtn = document.getElementById('searchBtn')
+        let searchResults = document.getElementById('searchResults')
+        let showMoreBtn = document.getElementById('showMoreBtn')
+
+        const accessKey = "cKx9B1kS3kxVz4Cy7efRxGFvbfhuYd_EEQ_VSaHMLC4"
+        let keyword = ""
+        let page = 1;
+
+        async function showResults() {
+            keyword = searchBox.value
+            let url = `https://api.unsplash.com/search/photos?page=${page}&query=${keyword}&client_id=${accessKey}&per_page=12`
+
+            let data = await fetch(url);
+            let response = await data.json()
+
+            // console.log(response);
+            let results = response.results
+            console.log(results); //it is an array containing object. So we will loop on it through map and select each object.
+
+            if (page === 1) {
+                searchResults.innerHTML = ''
+            }
+
+            results.map((result) => {
+                let imgUrl = result.urls.small
+                let img = document.createElement('img');
+                img.src = imgUrl;
+
+                let anchorTag = document.createElement('a');
+                anchorTag.href = result.links.html;
+                anchorTag.target = '_blank'
+                anchorTag.appendChild(img);
+
+                searchResults.appendChild(anchorTag)
+            })
+
+
+            showMoreBtn.style.display = 'block'
+
+
+        }
+
+
+        searchForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+             page = 1;
+            showResults()
+
+        })
+        showMoreBtn.addEventListener('click', function (e) {
+            page++;
+            showResults();
+
+
+        })
+
+    </script>
+</body>
+
+</html>

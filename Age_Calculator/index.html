@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins', 'serif';
+        }
+
+        .container {
+            background: linear-gradient(135deg, #ffa500, #faf500);
+            width: 100%;
+            min-height: 100vh;
+            color: #ffffff;
+            padding: 1vw;
+        }
+
+        .calculator {
+            /* background-color: red; */
+            width: 100%;
+            max-width: 600px;
+            margin-left: 10%;
+            margin-top: 10%;
+        }
+
+        .calculator h1 {
+            font-size: 4rem;
+        }
+
+        .calculator h1 span {
+            color: #c8227a;
+
+        }
+
+        .inputBox {
+            background-color: #ffffff8f;
+            min-height: 20vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            border-radius: 1vw;
+        }
+
+        .inputBox #date {
+            min-width: 26vw;
+            min-height: 8vh;
+            border-radius: 0.5vw;
+            border: none;
+            outline: none;
+            padding: 15px;
+            font-size: 1rem;
+        }
+
+        .inputBox #date::-webkit-calendar-picker-indicator {
+            /* top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: auto;
+            width: auto;
+            position: absolute;
+            background-position: calc(50% - 10px);
+            background-size: 30px; */
+            cursor: pointer;
+        }
+
+        /* other props not working properly  */
+
+        .inputBox button {
+            min-height: 7vh;
+            min-width: 12vw;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #d32a84, #f880c0);
+            color: #ffffff;
+            font-weight: 800;
+            transition: 0.5s;
+        }
+
+        .inputBox button:hover {
+            background: linear-gradient(135deg, #ff048a, #ed2791);
+            transform: scale(1.1);
+            transition: 0.5s;
+
+        }
+
+        #result {
+            font-size: 1.4rem;
+            margin: 1vw;
+            text-align: center;
+            color: #d32a84;
+            font-weight: 800;
+        }
+
+        #result span {
+            color: #8a2be2;
+            font-weight: 900;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="calculator">
+            <h1>JavaScript<br /> <span>Age Calculator</span></h1>
+            <div class="inputBox">
+                <input type="date" title="Pick Date" id="date">
+                <button id="calcBtn">Calculate</button>
+            </div>
+            <p id="result"></p>
+        </div>
+    </div>
+
+
+</body>
+
+<script>
+    let userInput = document.querySelector('#date');
+    userInput.max = new Date().toISOString().split("T")[0];
+    let button = document.querySelector('#calcBtn');
+    let result = document.querySelector('#result');
+
+    button.addEventListener('click', function () {
+        let birthDate = new Date(userInput.value)
+
+        let d1 = birthDate.getDate();
+        let m1 = birthDate.getMonth() + 1;
+        let y1 = birthDate.getFullYear();
+
+        // console.log(d1, m1, y1);
+
+        let todayDate = new Date()
+
+        let d2 = todayDate.getDate();
+        let m2 = todayDate.getMonth() + 1;
+        let y2 = todayDate.getFullYear();
+
+        // console.log(d2, m2, y2);
+
+        let d3, m3, y3;
+
+        y3 = y2 - y1
+
+        if (m2 >= m1) {
+            m3 = m2 - m1
+        } else {
+            y3--;
+            m3 = 12 + (m2 - m1)
+        }
+
+        if (d2 >= d1) {
+            d3 = d2 - d1
+        } else {
+            m3--;
+            //we will write function to get date of month
+            d3 = getDateInMonth(y1, m1) + (d2 - d1)
+
+        }
+        if (m3 < 0) {
+            m3 = 11;
+            y3--;
+        }
+
+        if (!userInput.value) {
+            result.innerHTML = `Please Add Your Correct Age`
+        } else {
+
+            result.innerHTML = `You are <span>${y3}</span> years, <span>${m3}</span> months and <span>${d3}</span> days young. 😍`
+        }
+
+
+    })
+
+    function getDateInMonth(year, month) {
+        return new Date(year, month, 0).getDate()
+    }
+
+
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+</head>
+<style>
+    * {
+        font-family: 'poppins';
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: linear-gradient(90deg, #e93434, #ebcd95, #020257);
+    }
+    h1{
+        /* background-color: red; */
+        color: #fb4141;
+        text-align: center;
+        margin-top: 10vh;
+        font-size: 4rem;
+    }
+
+    .container {
+        /* background-color: #fff; */
+        text-align: center;
+        min-width: 65vw;
+        min-height: 40vh;
+        margin: 10vh 2vw;
+        box-shadow: 0 0 2vw rgba(0, 0, 0, 0.1);
+        border-radius: 1vw;
+        color: #2c2121;
+    }
+
+    .time {
+        /* background-color: orange; */
+        padding-top: 10vh;
+        display: flex;
+        /* justify-content: space-evenly; */
+        font-size: 5rem;
+
+    }
+
+    .hours,
+    .colon,
+    .minutes,
+    .seconds {
+        margin: 0 7.5vw;
+    }
+
+    .seconds {
+        color: #f08080;
+    }
+
+
+
+    .spans {
+        display: flex;
+        justify-content: center;
+        margin-left: 1vw;
+    }
+
+    .span {
+        margin: 0 16.5vw;
+        font-size: 1.2rem;
+        font-weight: 1000;
+        color: #252525;
+    }
+
+    #minutes,
+    #seconds {
+        /* margin-left: 10vw; */
+
+    }
+
+    #seconds {
+        color: #f08080;
+    }
+</style>
+
+<body>
+    <h1>Digital Clock</h1>
+    <div class="container">
+        <div class="time">
+            <div class="hours"></div>
+            <div class="colon">:</div>
+
+            <div class="minutes"></div>
+            <div class="colon">:</div>
+
+            <div class="seconds"></div>
+        </div>
+        <div class="spans">
+            <div class="span">Hours</div>
+            <div class="span" id="minutes">Minutes</div>
+            <div class="span" id="seconds">Seconds</div>
+        </div>
+    </div>
+</body>
+
+<script>
+    // let time = (new Date()).toLocaleTimeString()
+    let hours = document.querySelector('.hours')
+    let minutes = document.querySelector('.minutes')
+    let seconds = document.querySelector('.seconds')
+
+    function currentTime() {
+        let time = new Date()
+        let fullHours = time.getHours() > 12 ? time.getHours() - 12 : time.getHours();
+        let fullMinutes = time.getMinutes() < 10 ? `0${time.getMinutes()}` : time.getMinutes()
+        let fullSeconds = time.getSeconds() < 10 ? `0${time.getSeconds()}` : time.getSeconds()
+        hours.innerHTML = `${time.getHours()}`
+        hours.innerHTML = fullHours
+        minutes.innerHTML = fullMinutes
+        seconds.innerHTML = fullSeconds
+    }
+    function showTime() {
+        setInterval(currentTime, 1000)
+    }
+
+    showTime()
+    // console.log(time.getHours());
+    // console.log(time.getMinutes());
+    // console.log(time.getSeconds());
+
+</script>
+
+</html>

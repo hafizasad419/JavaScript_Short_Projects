@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop</title>
+    <style>
+        * {
+            font-family: 'poppins';
+        }
+
+        body {
+            background: linear-gradient(90deg, #f08080, #87cefa);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h1 pre {
+            font-size: 3rem;
+            color: #fb3f3f;
+
+        }
+
+        .container {
+            /* background-color: #fff; */
+            /* margin-top: 10vh; */
+            min-height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left,
+        .right {
+            /* background-color: #fe7272; */
+            border: 2px dashed #fe7272;
+            margin: 0 5vw;
+            min-width: 15vw;
+            min-height: 50vh;
+            text-align: center;
+        }
+
+        .list {
+            background-color: #0e800e;
+            color: #ffffff;
+            cursor: grab;
+            margin: 2vh 1vw;
+            padding: 3vh 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>
+        <pre>D r a g      a n d       D r o p</pre>
+    </h1>
+    <div class="container">
+
+        <div class="left">
+            <div class="list" draggable="true">List 1</div>
+            <div class="list" draggable="true">List 2</div>
+            <div class="list" draggable="true">List 3</div>
+            <div class="list" draggable="true">List 4</div>
+        </div>
+
+
+        <div class="right">
+
+        </div>
+    </div>
+
+
+
+</body>
+
+<script>
+    let lists = document.querySelectorAll('.list') //will select all list elements
+    // console.log(lists);
+
+    let leftBox = document.querySelector('.left')
+    let rightBox = document.querySelector('.right')
+
+    for (let list of lists) {
+        list.addEventListener('dragstart', function (e) {
+            let selectedList = e.target
+
+            rightBox.addEventListener('dragover', function (e) {
+                e.preventDefault()
+            })
+            rightBox.addEventListener('drop', function (e) {
+                rightBox.appendChild(selectedList)
+                selectedList = null;
+            })
+
+            leftBox.addEventListener('dragover', function (e) {
+                e.preventDefault()
+            })
+            leftBox.addEventListener('drop', function (e) {
+                leftBox.appendChild(selectedList)
+                selectedList = null;
+            })
+        })
+
+    }
+</script>
+
+</html>

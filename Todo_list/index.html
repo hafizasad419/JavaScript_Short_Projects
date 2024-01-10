@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins', 'serif';
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(90deg, #ff617c, #87ceeb);
+            /* text-align: center; */
+        }
+
+        .container {
+            background-color: #fff;
+            margin: 10vh 30vw;
+            padding: 7vh 3vw;
+            border-radius: 1vw;
+
+        }
+
+        .container h1 {
+            /* text-align: left; */
+        }
+
+        #h1Span {
+            display: flex;
+            font-size: 1rem;
+            align-items: center;
+        }
+
+        .flex {
+            display: flex;
+            border-radius: 1vw;
+            position: relative;
+            /*Added position: relative; */
+            margin-top: 3vh;
+        }
+
+
+        #task {
+            min-height: 7vh;
+            min-width: 30vw;
+            background-color: #8d888897;
+            flex: 1;
+            border: none;
+            outline: none;
+            /* position: relative; */
+            border-radius: 35px;
+            text-indent: 1vw;
+        }
+
+        #addBtn {
+            min-height: 7vh;
+            min-width: 10vw;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            border-radius: 35px;
+            background: linear-gradient(135deg, #d32a84, #f880c0);
+            color: #ffffff;
+            font-weight: 800;
+            transition: 0.5s;
+            position: absolute;
+            right: 0;
+            /* top: 50%; */
+
+        }
+
+        .container .flex #addBtn:hover {
+            background: linear-gradient(135deg, #ff048a, #ed2791);
+            transform: scale(1.1);
+            transition: 0.5s;
+        }
+
+        .taskList {
+            list-style: none;
+            text-align: center;
+            margin: 5vh 0vw;
+        }
+
+        .taskList .eachTask {
+            /* background-color: #8d888897; */
+            margin: 4vh 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-width: 35vw;
+
+            /* position: relative; */
+            /* width: 20vw; */
+            /* word-wrap: break-word; */
+        }
+
+        .taskList .checked {
+            text-decoration: line-through;
+        }
+
+        .content {
+            /* background-color: yellow; */
+            /* min-width: 35vw; */
+            width: 30vw;
+            word-wrap: break-word;
+            background-color: #8d888897;
+            border-radius: 3vw;
+            padding: 2vh 1vw;
+            cursor: pointer;
+
+        }
+
+        .contentChecked {
+            color: #048104;
+
+        }
+
+        .deleteIcon {
+            /* background-color: #cb3a3a;
+            font-size: 1.3rem;
+            border-radius: 50%;
+            min-width: 2.2vw;*/
+
+            background-color: #cb3a3a;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            line-height: 30px;
+            font-size: 22px;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.5s;
+
+
+        }
+
+        .deleteIcon:hover {
+            background-color: #e90f0f;
+            transition: 0.5s;
+            transform: scale(1.1);
+
+
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <h1>To-Do List <span id="h1Span">(Click to mark completed)</span></h1>
+
+        <div class="flex">
+
+            <input  id="task" type="text" placeholder="Add Next Task Here" autocomplete="off">
+            <button id="addBtn">Add</button>
+
+        </div>
+
+        <ul class="taskList">
+
+        </ul>
+    </div>
+
+</body>
+
+<script>
+
+    let input = document.querySelector('#task')
+    let addBtn = document.querySelector('#addBtn');
+    let ul = document.querySelector('.taskList');
+    let li = document.querySelector('.eachTask');
+    let deleteIcon = document.querySelector('.deleteIcon');
+    showData()
+    
+    addBtn.addEventListener('click', function () {
+        if (!input.value) {
+            alert(`Please Write Task Name`)
+        } else {
+            let newli = document.createElement('li');
+            newli.className = 'eachTask';
+            
+
+
+            let div = document.createElement('div');
+            div.className = "content";
+            div.innerHTML = input.value
+            newli.appendChild(div)
+            let span = document.createElement('span');
+            span.innerHTML = "\u00d7"
+            span.className = "deleteIcon"
+            newli.appendChild(span)
+            input.value = '';
+            ul.appendChild(newli)
+
+            saveData()
+        }
+    })
+
+    ul.addEventListener('click', function (e) {
+        if (e.target.tagName === 'SPAN') {
+            e.target.parentNode.remove()
+            saveData()
+        }
+    })
+    ul.addEventListener('click', function (e) {
+        if (e.target.tagName === 'DIV' && e.target.classList.contains('content')) {
+            e.target.classList.toggle("checked");
+            e.target.closest('.eachTask').classList.toggle("contentChecked");
+        }
+    })
+
+
+    function saveData() {
+        localStorage.setItem("data", ul.innerHTML)
+    }
+    function showData() {
+        ul.innerHTML = localStorage.getItem("data")
+    }
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url(./Asad.jpg);
+    background-repeat: no-repeat;
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+}
+
+.intro{
+    display: inline;
+    position: relative;
+    top:  14.5vw;
+    left: 23vw;
+}
+
+button{
+    background-color: rgba(128, 4, 128, 0.798);
+    color: rgb(255, 137, 255);
+    position: relative;
+    top: 12vw;
+    left: 44vw;
+}
+button:hover{
+    cursor: pointer;
+    background-color: #000000;
+    color: #ffffff;
+}
+

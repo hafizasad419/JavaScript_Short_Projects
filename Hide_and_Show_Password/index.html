@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hide and Show Password</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins', 'serif';
+        }
+
+        body {
+            background: linear-gradient(90deg, #ffa600, #ff2146);
+        }
+
+        .container {
+            width: 40vw;
+            margin: 30vh 30vw;
+            /* background-color: red; */
+
+        }
+
+        label {
+            font-size: 3rem;
+            text-align: center;
+            text-indent: 4vw;
+            padding: 0 11vw;
+        }
+
+        .passwordContainer {
+            margin-top: 2vh;
+            background-color: #ffffff;
+            min-height: 10vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0vh 1vw;
+            border-radius: 0.5vw;
+        }
+
+
+        .passwordContainer input {
+            min-width: 25vw;
+            min-height: 9vh;
+            font-size: 1rem;
+            border: none;
+            outline: none;
+            background: transparent;
+
+        }
+
+        .passwordContainer span img {
+            width: 50px;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+
+        .passwordContainer span img:hover {
+            transform: scale(1.1);
+            transition: 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <label for="password">Password</label>
+        <div class="passwordContainer">
+
+            <input id="password" type="password" placeholder="Type Your Password Here">
+
+            <span class="show-hide-container"><img id="icon" src="./assets/show.png" alt=""></span>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+    let passwordInput = document.getElementById('password');
+    let showHideContainer = document.getElementById('show-hide-container');
+    let icon = document.getElementById('icon');
+
+
+    icon.addEventListener('click', function (e) {
+        if (passwordInput.type == "password") {
+
+            passwordInput.type = "text"
+            icon.src = './assets/hide.png'
+        } else {
+
+            passwordInput.type = "password"
+            icon.src = './assets/show.png'
+        }
+
+    })
+
+</script>
+
+</html>
