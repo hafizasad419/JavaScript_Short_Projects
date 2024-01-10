@@ -17,7 +17,7 @@
             background-color: #935375;
         }
 
-        .container{
+        .container {
             min-height: 100vh;
             background-color: #1f1818;
             display: flex;
@@ -49,6 +49,72 @@
             transition: 0.5s;
             background-color: #02924f;
         }
+
+        .popup {
+            background-color: #fff;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            position: absolute;
+            min-height: 50vh;
+            padding: 2vh 2vw;
+            border-radius: 1vw;
+
+            visibility: hidden;
+            transform: translate(-10%, -120%) scale(0.1);
+            transition: 0.3s;
+
+        }
+
+        .showpopup {
+            visibility: visible;
+            transform: scale(1);
+            transition: 1s;
+        }
+
+        .flexitems {
+            margin: 4vh;
+            font-size: 1.4rem;
+        }
+
+
+        .popup img {
+            width: 8vw;
+            margin-top: -8vh;
+        }
+
+
+
+
+
+
+
+
+
+        #okBtn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* margin: 4vh 0; */
+            height: 6vh;
+            width: 12vw;
+            font-size: 1.2rem;
+            color: #ffffff;
+            background-color: #044829;
+            border: none;
+            outline: none;
+            border-radius: 0.5vw;
+            cursor: pointer;
+            transition: 0.5s;
+
+        }
+
+        #okBtn:hover {
+
+            transition: 0.5s;
+            background-color: #02924f;
+        }
     </style>
 </head>
 
@@ -58,10 +124,33 @@
         <button type="submit" id="submitBtn">Submit</button>
 
         <div class="popup">
-            <img src="" alt="">
+            <img src="./assets/tick.png" alt="">
+            <h2 class="flexitems">Thank You !</h2>
+            <p class="flexitems">Your Details Has Been Successfully Submitted.</p>
+            <button type="submit" id="okBtn" class="flexitems">OK</button>
         </div>
     </div>
 
+
+    <script>
+        let submitBtn = document.getElementById("submitBtn");
+        let okBtn = document.getElementById("okBtn");
+        let popup = document.querySelector(".popup");
+
+
+
+        submitBtn.addEventListener('click', function () {
+
+            popup.classList.add("showpopup")
+        })
+
+
+        okBtn.addEventListener('click', function () {
+
+            popup.classList.remove("showpopup")
+        })
+
+    </script>
 </body>
 
 </html>
