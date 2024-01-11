@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We're Coming Soon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'poppins', serif;
+            color: #ffffff;
+        }
+
+        body {
+            background: linear-gradient(90deg, #b100b1, #006eff, #04acac);
+            padding: 0 9vw;
+        }
+
+
+        h1 {
+            /* background-color: #fff; */
+            color: #f89e2f;
+            padding: 2vh 0;
+        }
+
+        .message {
+            /* background-color: #fff; */
+            max-width: 50vw;
+            margin-top: 18vh;
+
+        }
+
+        .maintenance {
+            font-weight: 1000;
+            color: #f89e2f;
+
+        }
+
+        .message h2 {
+            font-size: 3rem;
+            margin-top: 1vh;
+        }
+
+        h2 span {
+            color: #f89e2f;
+        }
+
+        .countdown {
+            /* background-color: #ffa500; */
+            display: flex;
+            justify-content: left;
+            margin-top: 5vh;
+
+        }
+
+        .time {
+            margin: 0 2vw;
+            /* background-color: #faf500; */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .time p {
+            font-size: 3rem;
+        }
+
+        #daysDiv {
+            margin-left: 0;
+        }
+
+        button {
+            border: 2px solid #ffffff;
+            background: transparent;
+            min-width: 10vw;
+            min-height: 9vh;
+            margin: 6vh 0;
+            color: #ffffff;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 2vw;
+            cursor: pointer;
+            transition: 0.6s;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #ff7e93, #f89e2f);
+            transition: 0.5s;
+            /* color: #252525; */
+            border: none;
+            transform: scale(1.1);
+            border-radius: 1vw;
+        }
+
+        button i {
+            font-size: 1.1rem;
+            margin-left: 0.6vw;
+        }
+
+        #rocket {
+            width: 10vw;
+            position: absolute;
+            bottom: 0;
+            right: 10%;
+            animation: rocket 4s linear infinite;
+        }
+
+        @keyframes rocket {
+            0% {
+                bottom: 0;
+                right: 10%;
+                opacity: 0;
+            }
+
+            100% {
+                bottom: 100%;
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>AsadFlix</h1>
+
+    <div class="message">
+        <span class="maintenance">Website Is Under Maintenance</span>
+        <h2>We're <span>Launching</span> Soon</h2>
+    </div>
+
+    <div class="countdown">
+
+        <div class="time" id="daysDiv">
+            <p id="days"></p>
+            <span>Days</span>
+        </div>
+
+        <div class="time">
+            <p id="hours"></p>
+            <span>Hours</span>
+        </div>
+
+        <div class="time">
+            <p id="minutes"></p>
+            <span>Minutes</span>
+        </div>
+
+        <div class="time">
+            <p id="seconds"></p>
+            <span>Seconds</span>
+        </div>
+
+
+
+    </div>
+
+    <button type="submit">Learn More <i id="forwardIcon" class="fa-solid fa-play"></i></button>
+
+    <img id="rocket" src="./assets/rocket.png" alt="">
+
+
+
+    <script>
+
+        let countDown = new Date("Jan 25, 2024, 00:00:00").getTime();
+        // console.log(date);
+
+        let interval = setInterval(function () {
+            let now = new Date().getTime();
+            let difference = countDown - now;
+            // console.log(countDown);
+
+            let days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            let hours = Math.floor(difference % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+            let minutes = Math.floor(difference % (1000 * 60 * 60) / (1000 * 60));
+            let seconds = Math.floor(difference % (1000 * 60) / (1000));
+
+            document.getElementById("days").innerHTML = days >= 10 ? days : `0${days}`;
+            document.getElementById("hours").innerHTML = hours >= 10 ? hours : `0${hours}`;
+            document.getElementById("minutes").innerHTML = minutes >= 10 ? minutes : `0${minutes}`;
+            document.getElementById("seconds").innerHTML = seconds >= 10 ? seconds : `0${seconds}`;
+
+
+
+
+        }, 1000)
+
+
+    </script>
+
+</body>
+
+</html>
