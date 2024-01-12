@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins', sans-serif, serif;
+        }
+
+        body {
+            /* background: linear-gradient(90deg, #f08080, #189f9f); */
+            background: #e3edf7;
+            min-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            flex-direction: column;
+        }
+
+        .container {
+            width: 160px;
+            height: 160px;
+            /* background-color: red; */
+            padding: 20px;
+            position: relative;
+        }
+
+        .outer {
+            width: 160px;
+            height: 160px;
+            /* background-color: green; */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+                -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+        }
+
+        .inner {
+            width: 120px;
+            height: 120px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+            box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2),
+                inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
+                -0.5px -0.5px 0px rgba(255, 255, 255, 1),
+                0.5px 0.5px 0px rgba(0, 0, 0, 0.15),
+                0px 12px -10px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .number {
+            font-weight: 600;
+        }
+
+
+        svg {
+
+            position: absolute;
+            top: 20px;
+            left: 18px;
+
+        }
+
+        circle {
+            fill: none;
+            stroke: url(#GradientColor);
+            stroke-width: 20px;
+            stroke-dasharray: 440;
+            stroke-dashoffset: 472;
+            animation: hehe 4s linear forwards;
+            /* animation: hehe 2s linear forwards infinite; */
+        }
+
+        @keyframes hehe {
+
+            100% {
+
+
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="outer">
+            <div class="inner">
+                <div id="number">
+
+                </div>
+            </div>
+        </div>
+
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+            <defs>
+                <linearGradient id="GradientColor">
+                    <stop offset="0%" stop-color="#e91e63" />
+                    <stop offset="100%" stop-color="#673ab7" />
+                </linearGradient>
+            </defs>
+            <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+        </svg>
+    </div>
+
+    <div id="loading"></div>
+
+
+
+
+    <script>
+        let number = document.getElementById("number");
+        let count = 0;
+
+        let interval = setInterval(function () {
+            count += 1;
+            // number.innerHTML = `${count}%`; //uncomment for loading inside circle.
+
+            document.getElementById("loading").innerHTML = `Loading ${count}%`;
+
+
+            if (count === 100) {
+                clearInterval(interval)
+            }
+
+        }, 35)
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

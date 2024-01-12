@@ -27,6 +27,31 @@
             /* background-color: #fff; */
             color: #f89e2f;
             padding: 2vh 0;
+
+
+            font-size: 3rem;
+            font-weight: bold;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+        }
+
+        .letter {
+            animation: pop-up 0.5s ease-in-out;
+            transform-origin: bottom;
+            display: inline-block;
+            transform: scale(4deg);
+        }
+
+        @keyframes pop-up {
+            0% {
+                transform: scaleY(0);
+            }
+
+            100% {
+                transform: scaleY(1);
+            }
         }
 
         .message {
@@ -43,6 +68,8 @@
         }
 
         .message h2 {
+        /* background-color: #fff; */
+        min-width: 70vw;
             font-size: 3rem;
             margin-top: 1vh;
         }
@@ -128,11 +155,19 @@
 </head>
 
 <body>
-    <h1>AsadFlix</h1>
+    <h1><span class="letter">A</span>
+        <span class="letter">s</span>
+        <span class="letter">a</span>
+        <span class="letter">d</span>
+        <span class="letter">f</span>
+        <span class="letter">l</span>
+        <span class="letter">i</span>
+        <span class="letter">x</span>
+    </h1>
 
     <div class="message">
         <span class="maintenance">Website Is Under Maintenance</span>
-        <h2>We're <span>Launching</span> Soon</h2>
+        <h2 id="mainHeading">We're <span>Launching</span> Soon.</h2>
     </div>
 
     <div class="countdown">
@@ -169,7 +204,7 @@
 
     <script>
 
-        let countDown = new Date("Jan 25, 2024, 00:00:00").getTime();
+        let countDown = new Date("Jan 12, 2024, 19:10:09").getTime();
         // console.log(date);
 
         let interval = setInterval(function () {
@@ -189,8 +224,17 @@
 
 
 
+            if (difference <= 0) {
+                clearInterval(interval);
+                document.getElementById("days").innerHTML = "00"
+                document.getElementById("hours").innerHTML = "00"
+                document.getElementById("minutes").innerHTML = "00"
+                document.getElementById("seconds").innerHTML = "00"
+                document.getElementById("mainHeading").innerHTML = "We Have Officialy <span>Launched</span>."
+            }
 
         }, 1000)
+
 
 
     </script>
