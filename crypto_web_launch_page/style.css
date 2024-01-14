@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', serif;
+    box-sizing: border-box;
+}
+
+body {
+    /* min-width: 100vw; */
+    min-height: 110vh;
+    padding: 2vh 6vw;
+    background: url(./assets/background.png);
+    background-position: center;
+    background-size: cover;
+
+}
+
+.legends {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: #008000; */
+}
+
+
+#logo {
+    height: 10vh;
+    /* background-color: #ff0000; */
+    cursor: pointer;
+}
+
+.services {
+    display: flex;
+    /* background-color: #ffa500; */
+}
+
+ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+ul li {
+    margin: 0 1.5vw;
+    color: #ffffff;
+    font-weight: 10;
+    cursor: pointer;
+}
+
+#langBtn {
+    min-width: 7vw;
+    min-height: 7vh;
+    border-radius: 5vw;
+    border: 1px solid #ffffff;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+main {
+    /* background-color: #faf500; */
+    max-width: 50vw;
+    margin-top: 10vh;
+    /* padding: 4vh 0; */
+}
+
+h1 {
+    font-size: 5rem;
+    color: #ffffff;
+}
+
+#h1Span {
+    color: #ffa500;
+}
+
+#catchLine {
+    /* background-color: #212121; */
+    margin-top: 2vh;
+    color: #ffffff;
+    max-width: 29vw;
+    font-size: 0.9rem;
+}
+
+#exploreBtn {
+    margin-top: 4vh;
+    min-width: 15vw;
+    min-height: 8vh;
+    border-radius: 5vw;
+    font-size: 1.1rem;
+    border: none;
+    outline: none;
+    background: #ffa500;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+#bottomFlex {
+    margin: 2vh 0;
+    /* background-color: #faf666; */
+    display: flex;
+    justify-content: right;
+}
+
+.box {
+    /* background-color: #ffa666; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1vw;
+    min-height: 13vh;
+    min-width: 13vw;
+    border: 1px solid #ffffff;
+    border-radius: 0.7vw;
+
+}
+
+.coin-logo {
+    height: 5vh;
+    margin-right: 0.8vw;
+}
+
+.price{
+    color: #ffffff;
+}
+
+.coinName{
+    color: #ffa500;
+}
