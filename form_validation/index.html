@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation Using JS.</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/bc7873368c.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <form id="form">
+
+            <div class="input-field" id="name-field">
+                <label for="name">Full Name</label>
+                <input id="name" type="text" placeholder="Enter Your Name.">
+                <span class="name-error"></span>
+            </div>
+
+            <div class="input-field">
+                <label for="phone-no">Phone No.</label>
+                <input id="phone-no" type="tel" placeholder="+92 12345678">
+                <span class="phone-error"></span>
+            </div>
+
+            <div class="input-field" id="email-field">
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="john@company.com">
+                <span class="email-error"></span>
+            </div>
+
+            <div class="input-field" id="message-field">
+                <label for="message">Your Message</label>
+                <textarea rows="3" id="message" placeholder="Enter Your Message ."></textarea>
+                <span class="message-error" id="message-error"></span>
+            </div>
+
+            <button id="submitBtn" type="submit">Submit</button> <br>
+            <p class="submit-error"></p>
+
+
+        </form>
+    </div>
+
+</body>
+
+<script src="./script.js"></script>
+
+</html>
