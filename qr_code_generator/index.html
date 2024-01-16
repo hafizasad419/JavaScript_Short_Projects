@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins';
+            box-sizing: border-box;
+        }
+
+        body {
+            /* background: #619295; */
+        }
+
+        .wrapper {
+            background-color: #619295;
+            min-height: 100vh;
+            min-width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            min-height: 35vh;
+            min-width: 30vw;
+            padding: 2vh 2vw;
+            border-radius: 1vw;
+
+        }
+
+        h1 {
+            font-size: 1rem;
+            margin-top: 3vh;
+            /* text-align: center;  */
+        }
+
+        #qr-input {
+            width: 100%;
+            height: 7vh;
+            margin: 4vh 0;
+            border: 1px solid #66cbf3;
+            outline: none;
+            border-radius: 0.4vw;
+            text-indent: 0.5vw;
+
+        }
+
+        #generate-btn {
+            margin: 0 3vw;
+            width: 80%;
+            height: 8vh;
+            background-color: #1795c7;
+            color: #ffffff;
+            border: none;
+            outline: none;
+            border-radius: 0.4vw;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+
+        #generate-btn:hover {
+            background-color: #00719e;
+            transform: scale(1.1);
+            transition: transform 0.5s;
+        }
+
+        /* .img-box { */
+        /* background-color: red; 
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        /* #qrImg {
+        }
+         
+        .show {
+            padding: 4vh 9vw;
+            transition: 1s;
+            width: 100%;
+            height: 30vh;
+         } */
+
+        .img-box {
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: height 1s, opacity 2s;
+        }
+
+        .show {
+            transition: 2s;
+            height: 30vh;
+            /* Set a reasonable value */
+            padding: 4vh 9vw;
+            opacity: 1;
+        }
+
+        .input.error {
+            animation: shake 0.12s ease-in-out 10;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-2px);
+            }
+
+            50% {
+                transform: translateX(0);
+            }
+
+            75% {
+                transform: translateX(2px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="container">
+            <h1>Enter Your Text Or URL</h1>
+
+            <input class="input" type="text" id="qr-input" placeholder="Text or URL" title="Write any text or URL">
+
+            <div class="img-box">
+                <img id="qr-img" src="" alt="">
+            </div>
+
+            <button id="generate-btn" type="submit">Generate QR Code</button>
+        </div>
+
+    </div>
+
+    <script>
+        const qrInput = document.querySelector("#qr-input");
+        const imgBox = document.querySelector(".img-box");
+        const qrImg = document.querySelector("#qr-img");
+        const generateBtn = document.querySelector("#generate-btn");
+
+        generateBtn.addEventListener("click", function (e) {
+            if (qrInput.value <= 0) {
+                qrInput.classList.add("error");
+                setTimeout(() => (qrInput.classList.remove("error")), 1000)
+
+            } else {
+                imgBox.classList.add("show")
+                imgBox.classList.remove("img-box")
+                qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrInput.value}`;
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
