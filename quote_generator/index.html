@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quoter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins', serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffa1b1;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            color: #ffa1b1;
+            min-height: 55vh;
+            min-width: 45vw;
+            padding: 4vh 2vw;
+            border-radius: 1vw;
+            box-shadow: 0 0 100px #fefefe54;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h1+hr {
+            width: 6vw;
+            border: 2px solid #ffa1b1;
+            margin-left: 19vw;
+        }
+
+        .quote {
+            /* background-color: blue; */
+            margin: 2vh 0;
+            padding: 1vh 2vw;
+            font-size: 1.2rem;
+            text-align: center;
+            min-height: 17vh;
+            width: 45vw;
+        }
+
+        .author-flex {
+            /* background-color: red; */
+            min-height: 5vh;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+        }
+
+        .author-flex .line {
+            background-color: #ffa1b1;
+            height: 0.315vh;
+            margin: 0 1vw;
+            width: 2vw;
+            visibility: hidden;
+
+        }
+
+        .author-flex .author {
+            min-height: 3vh;
+            margin-right: 2vw;
+            font-weight: 800;
+        }
+
+        .buttons {
+            /* background-color: green; */
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            /* padding:2vh 0 ; */
+            min-height: 10vh;
+            margin-top: 5vh;
+        }
+
+        .buttons .btn {
+            margin: 0 1vw;
+            height: 8vh;
+            min-width: 10vw;
+            background-color: #ffa1b1;
+            border-radius: 2vw;
+            color: #ffffff;
+            font-weight: 800;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+
+        .buttons .btn:hover {
+            transform: scale(1.1);
+            transition: 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Quote of the day</h1>
+        <hr />
+
+        <p class="quote"></p>
+
+        <div class="author-flex">
+            <div class="line"></div>
+            <p class="author"></p>
+        </div>
+
+        <div class="buttons">
+            <button id="new-quote-btn" class="btn">New Quote</button>
+            <button id="tweet-btn" class="btn">Tweet</button>
+        </div>
+
+
+    </div>
+
+    <script>
+        let quoteBtn = document.getElementById("new-quote-btn");
+        let tweetBtn = document.getElementById("tweet-btn");
+        let quoteElement = document.querySelector(".quote");
+        let authorElement = document.querySelector(".author");
+        let authorLine = document.querySelector(".line");
+
+        let apiLink = "https://api.quotable.io/random";
+
+        async function getQuote() {
+            let response = await fetch(apiLink);
+            let data = await response.json();
+            quoteElement.innerHTML = data.content;
+            authorElement.innerHTML = data.author;
+            authorLine.style.visibility = "visible";
+
+        }
+
+        getQuote();
+        quoteBtn.addEventListener('click', getQuote);
+
+        function tweet() {
+            window.open(`https://twitter.com/intent/tweet?text=${quoteElement.innerHTML}`)
+        }
+        tweetBtn.addEventListener('click', tweet);
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
