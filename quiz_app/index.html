@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins';
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fd879b
+        }
+
+        .container {
+            background: #ffffff;
+            min-height: 65vh;
+            min-width: 50vw;
+            margin: 8vh 25vw;
+            padding: 3vh 3vw;
+            border-radius: 1vw;
+        }
+
+        h1 {
+            color: #ffa500;
+        }
+
+        hr {
+            margin-top: 1vh;
+            /* height: 2vh; */
+            border: 1px solid #ffa500;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-top: 3vh;
+            color: #fd879b;
+        }
+
+        .answer-buttons {
+            /* background-color: #ffa500; */
+            margin-top: 2vh;
+        }
+
+        .ans-btn {
+            color: #fd879b;
+            border: 1px solid #fd879b;
+            width: 100%;
+            height: 8vh;
+            margin: 2vh 0;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 1s;
+            background: none;
+        }
+
+        .ans-btn:hover {
+            background-color: #fd879b;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            transition: 0.4s;
+        }
+
+        .btn-container {
+            /* background: blue; */
+            width: 100%;
+            padding: 3vh 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .next-btn {
+            background-color: #ae7100;
+            min-height: 7vh;
+            min-width: 14vw;
+            cursor: pointer;
+            transition: 0.5s;
+            border: none;
+            outline: none;
+            border-radius: 0.4vw;
+            color: #ffffff;
+            font-size: 1rem;
+            display: none;
+        }
+
+        .next-btn:hover {
+            transform: scale(1.1);
+            background-color: #ffa500;
+            transition: 0.5s;
+
+        }
+
+        .correct {
+            background-color: #09a609;
+            border: none;
+            color: #fff;
+        }
+
+        .correct:hover {
+            background: #09a609;
+        }
+
+        .incorrect {
+            background-color: #f21414;
+            border: none;
+            color: #fff;
+        }
+
+        .incorrect:hover {
+            background: #f21414;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Simple Quiz</h1>
+        <hr>
+
+        <!-- question 1 -->
+        <div class="quiz">
+
+
+            <h2 class="question">
+
+            </h2>
+
+            <div class="answer-buttons">
+
+            </div>
+
+            <div class="btn-container">
+                <button class="next-btn">N E X T</button>
+            </div>
+
+
+        </div>
+
+
+
+        <!-- question 2 -->
+
+
+
+
+
+
+
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Which is the largest animal in the world?",
+
+                answers: [
+                    { text: "Shark", correct: false },
+                    { text: "Blue Whale", correct: true },
+                    { text: "Elephant", correct: false },
+                    { text: "Giraffe", correct: false },
+                ]
+
+            },
+
+            {
+                question: "Which is the largest desert in the world?",
+
+                answers: [
+                    { text: "Gobi", correct: false },
+                    { text: "Antractica", correct: false },
+                    { text: "Sahara", correct: true },
+                    { text: "Kalahari", correct: false },
+                ]
+
+            },
+
+            {
+                question: "Which is the smallest continent in the world?",
+
+                answers: [
+                    { text: "Australia", correct: true },
+                    { text: "Arctic", correct: false },
+                    { text: "Asia", correct: false },
+                    { text: "Africa", correct: false },
+                ]
+
+            },
+
+            {
+                question: "Which is the largest country in the world?",
+
+                answers: [
+                    { text: "Russia", correct: true },
+                    { text: "India", correct: false },
+                    { text: "America", correct: false },
+                    { text: "China", correct: false },
+                ]
+
+            },
+        ];
+
+        const questionElement = document.querySelector(".question");
+        const ansButtons = document.querySelector(".answer-buttons");
+        const nextBtn = document.querySelector(".next-btn");
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            nextBtn.innerHTML = "N E X T";
+            nextBtn.style.display = 'none'
+            showQuestion();
+
+        }
+
+        function showQuestion() {
+            let currentQuestion = questions[currentQuestionIndex];
+            let questionNo = currentQuestionIndex + 1;
+            questionElement.innerHTML = `${questionNo}. ${currentQuestion.question}`;
+
+            // Clear existing answer buttons
+            ansButtons.innerHTML = "";
+
+            // Create answer buttons
+            currentQuestion.answers.forEach((ans) => {
+                let btn = document.createElement("button");
+                btn.innerHTML = ans.text;
+                btn.classList.add("ans-btn");
+                ansButtons.appendChild(btn);
+
+                if (ans.correct) {
+                    btn.dataset.correct = ans.correct;
+                }
+
+                // Add click event listener to each button
+                btn.addEventListener("click", (e) => {
+                    const selectedBtn = e.target;
+                    const isCorrect = selectedBtn.dataset.correct === "true";
+
+                    if (isCorrect) {
+                        selectedBtn.classList.add("correct");
+                        score++;
+                    } else {
+                        selectedBtn.classList.add("incorrect");
+                    }
+
+                    Array.from(ansButtons.children).forEach((btn) => {
+                        if (btn.dataset.correct === "true") {
+                            btn.classList.add("correct")
+                        }
+                        btn.disabled = true;
+                    })
+                    nextBtn.style.display = 'block';
+
+                });
+
+
+            });
+        }
+
+
+
+        nextBtn.addEventListener('click', function () {
+            if (currentQuestionIndex < questions.length) {
+                handleNextButton()
+            } else {
+                startQuiz()
+            }
+        })
+
+        function handleNextButton() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                nextBtn.style.display = 'none';
+                showQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            resetState();
+            questionElement.innerHTML = `You Scored ${score} out of ${questions.length}.`;
+            nextBtn.innerHTML = "Play Again";
+
+        }
+
+        function resetState() {
+            while (ansButtons.firstChild) {
+                ansButtons.removeChild(ansButtons.firstChild)
+            }
+        }
+
+        startQuiz();
+
+
+
+
+
+    </script>
+</body>
+
+</html>
