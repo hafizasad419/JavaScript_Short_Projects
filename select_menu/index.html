@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Select Menu</title>
+    <style>
+        * {
+            font-family: 'poppins', serif;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            min-height: 100vh;
+            min-width: 100vw;
+            background: linear-gradient(90deg, #ffc0cb, #f08080, #ffc0cb);
+            padding: 20vh 0 0 40vw;
+            /* display: flex; */
+            /* justify-content: center; */
+            /* align-items: center; */
+        }
+
+
+
+        .select-menu {
+            background-color: #e5c5c5;
+            /* margin-top: 10vh; */
+            border-top-left-radius: 0.4vw;
+            border-top-right-radius: 0.4vw;
+            height: 8vh;
+            width: 20vw;
+            padding: 1vh 1vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+
+        }
+
+        #arrow {
+            width: 1.8vw;
+            transition: transform 0.3s;
+        }
+
+        .rotate {
+            transform: rotate(180deg);
+        }
+
+        #list {
+            width: 20vw;
+            background-color: #e5c5c5;
+            border-bottom-left-radius: 0.4vw;
+            border-bottom-right-radius: 0.4vw;
+            overflow: hidden;
+            transition: max-height 1s ease-in-out;
+
+
+
+        }
+
+        .height {
+            max-height: 0;
+
+        }
+
+        #list img {
+            width: 2vw;
+        }
+
+        #list .option {
+            display: flex;
+            justify-content: left;
+            padding: 3vh 1vw;
+            cursor: pointer;
+            transition: transform 0.5s;
+
+            /* background-color: green; */
+
+        }
+
+        .hide {
+            visibility: hidden;
+        }
+
+        .option:hover {
+            background-color: #ff7e7e;
+            color: #ffffff;
+            transition: 0.5s;
+            transform: scale(1.1);
+        }
+
+        .option p {
+            padding: 0 1vw;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="select-menu">
+            <p id="selected-text">Select Social Media</p>
+            <img id="arrow" src="./assets/arrow.png" alt="">
+        </div>
+
+        <ul id="list" class="hide">
+
+            <li class="option">
+                <img src="./assets/facebook.png" alt="">
+                <p class="social-media-name">Facebook</p>
+            </li>
+            <li class="option">
+                <img src="./assets/youtube.png" alt="">
+                <p class="social-media-name">Youtube</p>
+            </li>
+            <li class="option">
+                <img src="./assets/instagram.png" alt="">
+                <p class="social-media-name">Instagram</p>
+            </li>
+            <li class="option">
+                <img src="./assets/twitter.png" alt="">
+                <p class="social-media-name">Twitter</p>
+            </li>
+            <li class="option">
+                <img src="./assets/pinterest.png" alt="">
+                <p class="social-media-name">Pinterest</p>
+            </li>
+            <li class="option">
+                <img src="./assets/whatsapp.png" alt="">
+                <p class="social-media-name">Whatsapp</p>
+            </li>
+
+        </ul>
+    </div>
+
+
+    <script>
+        let slectMenu = document.querySelector('.select-menu');
+        let arrow = document.getElementById("arrow");
+        let list = document.getElementById("list");
+
+        let options = Array.from(document.getElementsByClassName("option"));
+        let selectedText = document.getElementById("selected-text");
+
+        for (option of options) {
+            option.addEventListener("click", function () {
+                list.classList.toggle("hide");
+                selectedText.innerHTML = this.textContent;
+                arrow.classList.toggle("rotate");
+
+                
+
+
+
+            })
+        }
+
+        // console.log(options);
+
+        slectMenu.addEventListener('click', function (e) {
+            list.classList.toggle("hide");
+            arrow.classList.toggle("rotate");
+
+            if (list.classList.contains("hide")) {
+                list.style.maxHeight = "0";
+            } else {
+                list.style.maxHeight = list.scrollHeight+ "px";
+            }
+
+        })
+
+
+        // list.style.background = "red"; 
+    </script>
+</body>
+
+</html>
